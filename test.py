@@ -8,19 +8,22 @@ db = SQLAlchemy(app)
 
 
 class Datasets(db.Model):
-    name = db.Column(db.String(64), index = True)
-    size = db.Column(db.Integer, primary_key = True)
+    name = db.Column(db.String(64), index=True)
+    size = db.Column(db.Integer, primary_key=True)
     source = db.Column(db.String(256), index=True)
     db_index = db.Column(db.Double, index=True)
     rdb_index = db.Column(db.Double, index=True)
     gdb_index = db.Column(db.Double, index=True)
     pdb_index = db.Column(db.Double, index=True)
 
+with app.app_context():
+    db.create_all()
+
 
 @app.route("/")
 def main():
     datasets = Datasets.query
-    return render_template('bootstrap_table.html', title='Bootstrap Table', users=datasets)
+    return render_template('bootstrap_table.html', title='Dataset Bias Leaderboard', datasets=datasets)
 
 
 if __name__ == '__main__':

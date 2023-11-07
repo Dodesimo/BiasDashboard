@@ -1,10 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
 
-</body>
-</html>
+{% block content %}
+  <table id="data" class="table table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Size</th>
+        <th>Source</th>
+        <th>db-index</th>
+        <th>gdb-index</th><th>rdb-index</th><th>pdb-index</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for dataset in datasets %}
+        <tr>
+          <td>{{ dataset.name }}</td>
+          <td>{{ dataset.size }}</td>
+          <td>{{ dataset.source }}</td>
+          <td>{{ dataset.db_index }}</td>
+          <td>{{ dataset.rdb_index }}</td><td>{{ dataset.gdb_index }}</td><td>{{ dataset.pdb_index }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
