@@ -8,16 +8,26 @@ db = SQLAlchemy(app)
 
 
 class Datasets(db.Model):
-    name = db.Column(db.String(64), index=True)
-    size = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(256), index=True)
+    size = db.Column(db.Integer)
     source = db.Column(db.String(256), index=True)
     db_index = db.Column(db.Double, index=True)
     rdb_index = db.Column(db.Double, index=True)
     gdb_index = db.Column(db.Double, index=True)
     pdb_index = db.Column(db.Double, index=True)
 
+
 with app.app_context():
     db.create_all()
+
+    # Sample record creation
+    dataset1 = Datasets(id=0, name="RedPajama-Data-V2", size=37, source="togethercomputer", db_index=0, rdb_index=2,
+                        gdb_index=2, pdb_index=3)
+    dataset2 = Datasets(id=1, name="ultrachat_200k", size=200000, source="HuggingFaceH4", db_index=0, rdb_index=100,
+                        gdb_index=2, pdb_index=30)
+    db.session.add_all([dataset1,dataset2])
+    db.session.commit()
 
 
 @app.route("/")
