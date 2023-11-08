@@ -8,6 +8,17 @@
 
   </head>
   <body>
+  <header>
+      <div class="container">
+        <h1 class="logo">bias.io</h1>
+        <strong><nav>
+          <ul class="menu">
+            <li><a href="{{ url_for('datasets') }}">Datasets</a></li>
+            <li><a href="{{ url_for('llms') }}">LLMs</a></li>
+          </ul>
+        </nav></strong>
+      </div>
+    </header>
     <div class="container">
       <p></p>
       <h1>{{ title }}</h1>
