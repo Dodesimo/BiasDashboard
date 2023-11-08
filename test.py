@@ -36,7 +36,9 @@ with app.app_context():
                         gdb_index=2, pdb_index=3)
     dataset2 = Datasets(id=1, name="ultrachat_200k", size=200000, source="HuggingFaceH4", db_index=0, rdb_index=100,
                         gdb_index=2, pdb_index=30)
-    db.session.add_all([dataset1, dataset2])
+    llm1 = LLMS(id=0, name="Yi-34B", size="34B", source="01-ai", glue=0, stereoset=2, mb_index=2)
+    llm2 = LLMS(id=1, name="OpenChat 3.5", size="7B", source="OpenChat", glue=0, stereoset=4, mb_index=1)
+    db.session.add_all([dataset1, dataset2, llm1, llm2])
     db.session.commit()
 
 
@@ -48,7 +50,8 @@ def datasets():
 
 @app.route("/llms")
 def llms():
-    return "hello!"
+    llms = LLMS.query
+    return render_template('llms.html', title="LLM Bias Leaderboard", llms=llms)
 
 
 if __name__ == '__main__':
