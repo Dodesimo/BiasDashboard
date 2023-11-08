@@ -43,7 +43,7 @@ with app.app_context():
 @app.route("/datasets")
 def datasets():
     datasets = Datasets.query
-    return render_template('bootstrap_table.html', title='Dataset Bias Leaderboard', datasets=datasets)
+    return render_template('datasets.html', title='Dataset Bias Leaderboard', datasets=datasets)
 
 
 @app.route("/llms")
