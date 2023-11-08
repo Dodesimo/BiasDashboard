@@ -10,12 +10,22 @@ db = SQLAlchemy(app)
 class Datasets(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(256), index=True)
-    size = db.Column(db.Integer)
+    size = db.Column(db.String(4), index=True)
     source = db.Column(db.String(256), index=True)
     db_index = db.Column(db.Double, index=True)
     rdb_index = db.Column(db.Double, index=True)
     gdb_index = db.Column(db.Double, index=True)
     pdb_index = db.Column(db.Double, index=True)
+
+
+class LLMS(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(256), index=True)
+    size = db.Column(db.String(4), index=True)
+    source = db.Column(db.String(256), index=True)
+    glue = db.Column(db.Double, index=True)
+    stereoset = db.Column(db.Double, index=True)
+    mb_index = db.Column(db.Double, index=True)
 
 
 with app.app_context():
@@ -26,14 +36,19 @@ with app.app_context():
                         gdb_index=2, pdb_index=3)
     dataset2 = Datasets(id=1, name="ultrachat_200k", size=200000, source="HuggingFaceH4", db_index=0, rdb_index=100,
                         gdb_index=2, pdb_index=30)
-    db.session.add_all([dataset1,dataset2])
+    db.session.add_all([dataset1, dataset2])
     db.session.commit()
 
 
-@app.route("/")
-def main():
+@app.route("/datasets")
+def datasets():
     datasets = Datasets.query
     return render_template('bootstrap_table.html', title='Dataset Bias Leaderboard', datasets=datasets)
+
+
+@app.route("/llms")
+def llms():
+    return "hello!"
 
 
 if __name__ == '__main__':
