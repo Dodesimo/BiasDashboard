@@ -53,6 +53,9 @@ def llms():
     llms = LLMS.query
     return render_template('llms.html', title="LLM Bias Leaderboard", llms=llms)
 
+@app.route("/")
+def main():
+    return render_template("home.html")
 
 if __name__ == '__main__':
     app.run()
