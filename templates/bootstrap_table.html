@@ -26,3 +26,11 @@
     </tbody>
   </table>
 {% endblock %}
+
+{% block scripts %}
+  <script>
+    $(document).ready(function () {
+      $('#data').DataTable();
+    });
+  </script>
+{% endblock %}
