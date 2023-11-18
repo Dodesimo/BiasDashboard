@@ -47,6 +47,9 @@ def datasets():
     datasets = Datasets.query
     return render_template('datasets.html', title='Dataset Bias Leaderboard', datasets=datasets)
 
+@app.route("/calculatedb")
+def calculate_db_index():
+    return {"message": "this is an endpoint to calculate db-index"}
 
 @app.route("/llms")
 def llms():
