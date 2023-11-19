@@ -12,6 +12,18 @@
 <p></p>
 <p>Provide the HuggingFace link to a dataset in the block below, and we can calculate how biased it is in regard to implicit bias.</p>
 <p>When you upload a dataset, it is automatically added to our leaderboard, alongside its db-index score.</p>
+<p></p>
+
+<form action="{{ url_for('calculate_db_index') }}" method="post">
+    <label for="dsetlabel">Dataset name:</label><br>
+    <input type="text" id="dsetlabel" name="dsetlabel">
+    <input type="submit">
+</form>
+
+<p></p>
+
+
+<p style="">Based on calculations detailed in the paper, the dataset yielded a db-index of {{ dbi }}.</p>
 
 </body>
 </html>

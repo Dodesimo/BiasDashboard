@@ -6,13 +6,14 @@ import random
 
 nlp = en_core_web_lg.load()
 
+
 def dbIndex(l1):
-    #Download each dataset and convert to Pandas dataframe
+    # Download each dataset and convert to Pandas dataframe
     targetDataset = load_dataset(l1)
     targetDataset.set_format(type='pandas')
     targetDataset = targetDataset['train'][1:]
 
-    #Base db-index based on implicit bias
+    # Base db-index based on implicit bias
     comparisonDataset = load_dataset("henryscheible/implicit_bias")
     comparisonDataset.set_format(type='pandas')
     comparisonDataset = comparisonDataset['train'][1:]
@@ -39,3 +40,7 @@ def dbIndex(l1):
     # Raise to inverse power of size
     dbi = tcs ** (1 / len(targetDataset))
     return dbi
+
+
+def test(l1):
+    dbindex =  l1 + 2
