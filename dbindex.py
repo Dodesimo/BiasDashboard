@@ -32,7 +32,7 @@ def dbIndex(l1):
     tcs = 0
 
     # Go through each target entry
-    for entry in targetDataset.columns[0]:
+    for entry in targetDataset.report:
         # Find similariity between each target and the comparison entry
         vecEntry = nlp(entry)
         tcs += vecEntry.similarity(vectorizedComparisonEntry)
@@ -43,4 +43,4 @@ def dbIndex(l1):
 
 
 def test(l1):
-    dbindex =  l1 + 2
+    return 5 + 2

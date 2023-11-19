@@ -1,11 +1,14 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
+from dbindex import test as t
+from dbindex import dbIndex
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
+dbCalculated = False
 
 class Datasets(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -47,18 +50,29 @@ def datasets():
     datasets = Datasets.query
     return render_template('datasets.html', title='Dataset Bias Leaderboard', datasets=datasets)
 
+
 @app.route("/dbindex")
-def dbindex(methods=["GET", "POST"]):
+def dbindex():
     return render_template('dbindex.html')
+
+
+@app.route("/calculate_db_index", methods=["POST"])
+def calculate_db_index():
+    if request.method == "POST":
+        link = request.form.get('dsetlabel')
+        return render_template("calculated.html", dbi=t((link)))
+
 
 @app.route("/llms")
 def llms():
     llms = LLMS.query
     return render_template('llms.html', title="LLM Bias Leaderboard", llms=llms)
 
+
 @app.route("/")
 def main():
     return render_template("home.html")
+
 
 if __name__ == '__main__':
     app.run()
