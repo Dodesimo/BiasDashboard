@@ -31,6 +31,8 @@ def dbIndex(l1):
     # initialitize total cosine similarity
     tcs = 0
 
+    #Use iterrows (not ideal but better thatn whatever is for loop)
+
     # Go through each target entry
     for entry in targetDataset.report:
         # Find similariity between each target and the comparison entry

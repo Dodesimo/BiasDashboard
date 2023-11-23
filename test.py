@@ -60,7 +60,7 @@ def dbindex():
 def calculate_db_index():
     if request.method == "POST":
         link = request.form.get('dsetlabel')
-        return render_template("calculated.html", dbi=t((link)))
+        return render_template("calculated.html", dbi=dbIndex((link)))
 
 
 @app.route("/llms")
