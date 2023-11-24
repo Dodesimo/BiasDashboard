@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from dbindex import test as t
-from dbindex import dbIndex
+from dbindex import dbIndex, test
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
@@ -70,6 +70,11 @@ def calculate_db_index():
 def mbindex():
     return render_template('mbindex.html')
 
+@app.route(rule="/calculate_mb_index", methods=["POST"])
+def calculate_mb_index():
+    if request.method == "POST":
+        link = request.form.get('llmlabel')
+        return render_template("calculatedmbindex.html", mbi=test((link)))
 
 @app.route("/")
 def main():
