@@ -50,6 +50,10 @@ def datasets():
     datasets = Datasets.query
     return render_template('datasets.html', title='Dataset Bias Leaderboard', datasets=datasets)
 
+@app.route("/llms")
+def llms():
+    llms = LLMS.query
+    return render_template('llms.html', title="LLM Bias Leaderboard", llms=llms)
 
 @app.route("/dbindex")
 def dbindex():
@@ -62,11 +66,9 @@ def calculate_db_index():
         link = request.form.get('dsetlabel')
         return render_template("calculated.html", dbi=dbIndex((link)))
 
-
-@app.route("/llms")
-def llms():
-    llms = LLMS.query
-    return render_template('llms.html', title="LLM Bias Leaderboard", llms=llms)
+@app.route("/mbindex")
+def mbindex():
+    return render_template('mbindex.html')
 
 
 @app.route("/")

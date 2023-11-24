@@ -31,18 +31,13 @@ def dbIndex(l1):
     # initialitize total cosine similarity
     tcs = 0
 
-    #Use iterrows (not ideal but better thatn whatever is for loop)
-
-    # Go through each target entry
-    for entry in targetDataset.report:
-        # Find similariity between each target and the comparison entry
-        vecEntry = nlp(entry)
+    for index, row in targetDataset.iterrows():
+        vecEntry = nlp(row[targetDataset.columns[0]])
         tcs += vecEntry.similarity(vectorizedComparisonEntry)
 
     # Raise to inverse power of size
     dbi = tcs ** (1 / len(targetDataset))
     return dbi
-
 
 def test(l1):
     return 5 + 2
